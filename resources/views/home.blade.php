@@ -197,22 +197,184 @@
 .btn-white-ghost { padding: 13px 24px; border-radius: var(--radius-xs); background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); color: white; font-size: 14px; font-weight: 500; cursor: pointer; font-family: var(--font-display); text-decoration: none; display: inline-flex; align-items: center; gap: 7px; transition: all 0.2s; backdrop-filter: blur(8px); }
 .btn-white-ghost:hover { background: rgba(255,255,255,0.2); }
 
-/* ══════════════════════════════════════
-   BLOG CARDS
-══════════════════════════════════════ */
-.blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
-.blog-card { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; transition: all 0.25s; text-decoration: none; color: inherit; display: block; }
-.blog-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.09); }
-.blog-thumb { width: 100%; height: 200px; display: flex; align-items: center; justify-content: center; font-size: 72px; position: relative; overflow: hidden; transition: transform 0.4s; }
-.blog-card:hover .blog-thumb { transform: scale(1.04); }
-.blog-body { padding: 20px; }
-.blog-cat { font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: var(--primary); margin-bottom: 8px; }
-.blog-title { font-size: 16px; font-weight: 600; line-height: 1.45; margin-bottom: 10px; color: var(--text); }
-.blog-excerpt { font-size: 13px; color: var(--text-muted); line-height: 1.7; margin-bottom: 16px; }
-.blog-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-hint); }
-.blog-author { display: flex; align-items: center; gap: 6px; }
-.blog-author-avatar { width: 24px; height: 24px; border-radius: 50%; background: var(--primary-pale2); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; color: var(--primary); }
-.blog-date { font-size: 11px; color: var(--text-hint); }
+ /* ── BLOG SECTION ── */
+ .blog-section {
+    padding: 2.5rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+.blog-see-all:hover {
+  background: var(--teal, #085041);  /* ← fallback juga */
+  transform: translateY(-1px);
+}
+  /* ── GRID 2 KOLOM: featured kiri, side-stack kanan ── */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: 1.55fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 680px) {
+    .blog-grid { grid-template-columns: 1fr; }
+  }
+ 
+  /* ── FEATURED CARD (besar, kiri) ── */
+  .blog-featured {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow .25s, transform .2s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .blog-featured:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+  }
+ 
+  .bf-thumb {
+    height: 210px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .bf-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    opacity: 0;
+    transition: opacity .5s, transform .45s;
+  }
+  .bf-thumb img.loaded { opacity: 1; }
+  .blog-featured:hover .bf-thumb img { transform: scale(1.04); }
+ 
+  .bf-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(7,78,58,.6) 0%, transparent 55%);
+  }
+  .bf-badge {
+    position: absolute; top: 12px; left: 12px;
+    background: var(--gold); color: white;
+    padding: 3px 10px; border-radius: 4px;
+    font-size: 9.5px; font-weight: 700; letter-spacing: .09em;
+  }
+  .bf-cat-bottom {
+    position: absolute; bottom: 12px; left: 12px;
+    font-size: 9.5px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 20px;
+  }
+ 
+  .bf-body {
+    padding: 1.2rem 1.25rem 1.1rem;
+    display: flex; flex-direction: column; flex: 1;
+  }
+  .bf-title {
+    font-family: var(--font-serif);
+    font-size: 1.05rem; font-weight: 700;
+    line-height: 1.45; color: var(--text);
+    margin-bottom: .6rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .bf-excerpt {
+    font-size: 12.5px; color: var(--text-muted);
+    line-height: 1.75; flex: 1; margin-bottom: .9rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .bf-footer {
+    display: flex; align-items: center;
+    justify-content: space-between;
+    padding-top: .75rem;
+    border-top: 1px solid var(--border);
+  }
+  .bf-meta {
+    font-size: 11px; color: var(--text-faint);
+    display: flex; gap: .75rem;
+  }
+  .bf-read {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 12px; font-weight: 600; color: var(--green);
+  }
+ 
+  /* ── SIDE STACK (kanan, 3 kartu kecil) ── */
+  .blog-side {
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+ 
+  .blog-side-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden; display: flex;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow .2s, transform .18s;
+    text-decoration: none; color: inherit;
+  }
+  .blog-side-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateX(3px);
+  }
+ 
+  .bsc-thumb {
+    width: 100px; min-height: 90px;
+    flex-shrink: 0; position: relative; overflow: hidden;
+  }
+  .bsc-thumb img {
+    width: 100%; height: 100%; object-fit: cover;
+    position: absolute; inset: 0;
+    opacity: 0; transition: opacity .4s;
+  }
+  .bsc-thumb img.loaded { opacity: 1; }
+  .bsc-thumb-icon {
+    position: absolute; inset: 0;
+    display: flex; align-items: center;
+    justify-content: center; font-size: 26px;
+  }
+  .bsc-catbadge {
+    position: absolute; bottom: 6px; left: 6px;
+    font-size: 8.5px; font-weight: 700;
+    padding: 2px 7px; border-radius: 3px;
+    text-transform: uppercase; letter-spacing: .07em;
+    background: rgba(255,255,255,.92); color: var(--teal);
+  }
+ 
+  .bsc-body {
+    padding: .8rem .9rem;
+    display: flex; flex-direction: column;
+    justify-content: space-between; flex: 1;
+  }
+  .bsc-title {
+    font-size: 12.5px; font-weight: 600;
+    line-height: 1.45; color: var(--text); margin-bottom: .4rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .bsc-meta {
+    font-size: 10.5px; color: var(--text-faint);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .bsc-read { font-size: 11px; font-weight: 600; color: var(--green); }
+ 
+  /* ── badge kategori ── */
+  .c-berita  { background: var(--green-light); color: var(--teal); }
+  .c-kajian  { background: #e6f0fa; color: #1a5fa5; }
+  .c-ekonomi { background: #eef7ee; color: #2d7a2d; }
+  .c-zakat   { background: var(--gold-light); color: var(--gold); }
+  .c-sosial  { background: #fbeaf0; color: #993556; }
+  .c-mualaf  { background: var(--green-light); color: var(--teal); }
+  .c-ramadhan{ background: #f3eafd; color: #6b21a8; }
+  .c-haji    { background: var(--gold-light); color: var(--gold); }
 
 /* ══════════════════════════════════════
    RESPONSIVE
@@ -466,74 +628,130 @@
 {{-- ══════════════════════════════════════
      BLOG SECTION
 ══════════════════════════════════════ --}}
-<section class="section section-alt" id="blog">
-  <div class="container">
-    <div class="section-header-row">
-      <div class="section-header" style="margin-bottom:0">
-        <div class="section-eyebrow reveal">Artikel & Inspirasi</div>
-        <h2 class="section-title reveal reveal-delay-1">Tulisan Terbaru<br>dari <em>Berkahin</em></h2>
-        <p class="section-desc reveal reveal-delay-2">Temukan inspirasi, panduan, dan cerita kebaikan dari komunitas donatur dan penerima manfaat kami.</p>
-      </div>
-      <a href="{{ url('/blog') }}" class="btn-see-all reveal reveal-delay-1">
-        Lihat Semua
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-    </div>
-
-    <div style="height:40px"></div>
-
-    <div class="blog-grid">
-
-      <a href="{{ url('/blog/panduan-qurban') }}" class="blog-card reveal">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,#064e3b,#065f46)">🌙</div>
-        <div class="blog-body">
-          <div class="blog-cat">Fiqih & Ibadah</div>
-          <div class="blog-title">Panduan Lengkap Ibadah Qurban: Syarat, Waktu, dan Tata Cara yang Benar</div>
-          <div class="blog-excerpt">Memahami ibadah qurban secara menyeluruh agar pelaksanaannya sesuai syariat dan mendapatkan keberkahan yang optimal...</div>
-          <div class="blog-footer">
-            <div class="blog-author">
-              <div class="blog-author-avatar">US</div>
-              <span>Ust. Salim</span>
-            </div>
-            <div class="blog-date">3 Apr 2025</div>
-          </div>
-        </div>
-      </a>
-
-      <a href="{{ url('/blog/tips-donasi') }}" class="blog-card reveal reveal-delay-1">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,#1e3a5f,#2563a8)">💡</div>
-        <div class="blog-body">
-          <div class="blog-cat">Tips Donasi</div>
-          <div class="blog-title">5 Tips Memilih Program Donasi yang Tepat dan Terpercaya di Era Digital</div>
-          <div class="blog-excerpt">Dengan banyaknya platform donasi online, penting untuk mengetahui cara memilih lembaga yang amanah dan transparan...</div>
-          <div class="blog-footer">
-            <div class="blog-author">
-              <div class="blog-author-avatar">RD</div>
-              <span>Redaksi</span>
-            </div>
-            <div class="blog-date">1 Apr 2025</div>
-          </div>
-        </div>
-      </a>
-
-      <a href="{{ url('/blog/kisah-beasiswa') }}" class="blog-card reveal reveal-delay-2">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,#4a1a00,#7c3d00)">❤️</div>
-        <div class="blog-body">
-          <div class="blog-cat">Cerita Kebaikan</div>
-          <div class="blog-title">Dari Donatur ke Harapan: Kisah Inspiratif Penerima Beasiswa Berkahin</div>
-          <div class="blog-excerpt">Perkenalkan Ahmad, siswa berprestasi dari pelosok Sulawesi yang kini berkuliah di universitas impiannya berkat dukungan donatur...</div>
-          <div class="blog-footer">
-            <div class="blog-author">
-              <div class="blog-author-avatar">NR</div>
-              <span>Nur Rahmah</span>
-            </div>
-            <div class="blog-date">28 Mar 2025</div>
-          </div>
-        </div>
-      </a>
-
-    </div>
+<section class="blog-section">
+ 
+{{-- Header --}}
+<div class="section-header-row" style="margin-bottom:2rem">
+  <div class="section-header" style="margin-bottom:0">
+    <div class="section-eyebrow reveal">Artikel &amp; Kajian</div>
+    <h2 class="section-title reveal reveal-delay-1">Tulisan Terbaru <em>Berkahin</em></h2>
+    <p class="section-desc reveal reveal-delay-2">Temukan inspirasi, panduan, dan cerita kebaikan dari komunitas donatur dan penerima manfaat kami.</p>
   </div>
+  <a href="{{ url('/blog') }}" class="btn-see-all reveal reveal-delay-1">
+    Lihat Semua
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
+</div>
+ 
+  {{-- Grid --}}
+  <div class="blog-grid">
+ 
+    {{-- ── FEATURED: Solidaritas Gaza ── --}}
+    <a class="blog-featured"
+       href="https://www.republika.co.id/berita/qquap1440/solidaritas-umat-islam-indonesia-untuk-gaza"
+       target="_blank" rel="noopener">
+      <div class="bf-thumb" style="background:linear-gradient(135deg,#e8f7f2,#1a9270)">
+        <img id="blog-img-0"
+             src=""
+             alt="Solidaritas Gaza"
+             loading="lazy"/>
+        <div class="bf-overlay"></div>
+        <span class="bf-badge">ARTIKEL UTAMA</span>
+        <span class="bf-cat-bottom c-berita">Berita</span>
+      </div>
+      <div class="bf-body">
+        <div class="bf-title">
+          Solidaritas Umat Islam Indonesia untuk Gaza: Donasi Melebihi Target
+        </div>
+        <div class="bf-excerpt">
+          Umat Islam di seluruh Indonesia menunjukkan kepedulian luar biasa melalui
+          berbagai gerakan donasi kemanusiaan yang terkoordinasi lintas ormas Islam besar.
+        </div>
+        <div class="bf-footer">
+          <div class="bf-meta">
+            <span>Tim Redaksi</span>
+            <span>17 Apr 2026</span>
+            <span>5 mnt baca</span>
+          </div>
+          <span class="bf-read">
+            Baca
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+      </div>
+    </a>
+ 
+    {{-- ── SIDE STACK ── --}}
+    <div class="blog-side">
+ 
+      {{-- Kartu 2: BSI Laba Tertinggi --}}
+      <a class="blog-side-card"
+         href="https://www.republika.co.id/berita/ekonomi/perbankan/bsi-laba-tertinggi"
+         target="_blank" rel="noopener">
+        <div class="bsc-thumb" style="background:linear-gradient(135deg,#d4f0e8,#7dd4bc)">
+          <div class="bsc-thumb-icon">🏦</div>
+          <img id="blog-img-1" src="" alt="BSI" loading="lazy"/>
+          <span class="bsc-catbadge c-ekonomi">Ekonomi</span>
+        </div>
+        <div class="bsc-body">
+          <div class="bsc-title">
+            Bank Syariah Indonesia Raih Laba Tertinggi Sepanjang Sejarah
+          </div>
+          <div class="bsc-meta">
+            <span>16 Apr 2026 &nbsp;·&nbsp; 4 mnt</span>
+            <span class="bsc-read">Baca →</span>
+          </div>
+        </div>
+      </a>
+ 
+      {{-- Kartu 3: Panduan Zakat --}}
+      <a class="blog-side-card"
+         href="https://baznas.go.id/berita/panduan-zakat-penghasilan-2026"
+         target="_blank" rel="noopener">
+        <div class="bsc-thumb" style="background:linear-gradient(135deg,#fdf3e3,#f5c878)">
+          <div class="bsc-thumb-icon">💰</div>
+          <img id="blog-img-2" src="" alt="Zakat" loading="lazy"/>
+          <span class="bsc-catbadge c-zakat">Zakat</span>
+        </div>
+        <div class="bsc-body">
+          <div class="bsc-title">
+            Panduan Lengkap Zakat Penghasilan Profesi 2026
+          </div>
+          <div class="bsc-meta">
+            <span>15 Apr 2026 &nbsp;·&nbsp; 6 mnt</span>
+            <span class="bsc-read">Baca →</span>
+          </div>
+        </div>
+      </a>
+ 
+      {{-- Kartu 4: Fintech Syariah --}}
+      <a class="blog-side-card"
+         href="https://www.ojk.go.id/id/kanal/syariah/berita/fintech-syariah-2026"
+         target="_blank" rel="noopener">
+        <div class="bsc-thumb" style="background:linear-gradient(135deg,#e6f0fa,#b5d4f4)">
+          <div class="bsc-thumb-icon">💻</div>
+          <img id="blog-img-3" src="" alt="Fintech" loading="lazy"/>
+          <span class="bsc-catbadge c-kajian">Kajian</span>
+        </div>
+        <div class="bsc-body">
+          <div class="bsc-title">
+            Fintech Syariah: Antara Peluang dan Tantangan Hukum Islam
+          </div>
+          <div class="bsc-meta">
+            <span>14 Apr 2026 &nbsp;·&nbsp; 5 mnt</span>
+            <span class="bsc-read">Baca →</span>
+          </div>
+        </div>
+      </a>
+ 
+    </div>{{-- end blog-side --}}
+  </div>{{-- end blog-grid --}}
+ 
 </section>
 
 @endsection
@@ -590,5 +808,22 @@ document.getElementById('heroSlider').addEventListener('touchend', e => {
   const diff = touchStartX - e.changedTouches[0].clientX;
   if (Math.abs(diff) > 50) diff > 0 ? nextSlide() : prevSlide();
 });
+
+ /* ── Lazy-load gambar blog section ── */
+ (function () {
+    var imgs = [
+      { id: 'blog-img-0', src: 'https://images.unsplash.com/photo-1609743522471-83c84ce23e32?w=800&q=80' },
+      { id: 'blog-img-1', src: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&q=80' },
+      { id: 'blog-img-2', src: 'https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=400&q=80' },
+      { id: 'blog-img-3', src: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&q=80' },
+    ];
+    imgs.forEach(function (item) {
+      var el = document.getElementById(item.id);
+      if (!el) return;
+      var t = new Image();
+      t.onload = function () { el.src = item.src; el.classList.add('loaded'); };
+      t.src = item.src;
+    });
+  })();
 </script>
 @endpush

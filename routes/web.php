@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DonasiController;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,5 @@ Route::get('/program/beasiswa', fn() => redirect()->route('donasi.beasiswa'));
 
 // ── Wakaf ─────────────────────────────────────────────────────────────────
 Route::get('/wakaf', fn() => view('wakaf.index'))->name('wakaf');
+
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
