@@ -440,11 +440,11 @@
         <h1 class="slide-title">Tunaikan Zakat,<br><em>Sucikan Harta</em><br>dan Jiwa</h1>
         <p class="slide-desc">Bayar zakat fitrah dan zakat maal dengan mudah, transparan, dan tersalurkan tepat sasaran kepada mustahik yang membutuhkan.</p>
         <div class="slide-actions">
-          <a href="{{ url('/#zakat') }}" class="slide-btn-main" style="background:#3b82f6;color:white">
+          <a href="{{ url('/zakat') }}" class="slide-btn-main" style="background:#3b82f6;color:white">
             Bayar Zakat
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <a href="{{ url('/kalkulator-zakat') }}" class="slide-btn-ghost">Kalkulator Zakat</a>
+          <a href="{{ url('/zakat#kalkulator') }}" class="slide-btn-ghost">Kalkulator Zakat</a>
         </div>
       </div>
     </div>
@@ -619,7 +619,7 @@
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
           Bayar Zakat
         </a>
-        <a href="{{ url('/kalkulator-zakat') }}" class="btn-white-ghost">Kalkulator Zakat</a>
+        <a href="{{ url('/zakat#kalkulator') }}" class="btn-white-ghost">Kalkulator Zakat</a>
       </div>
     </div>
   </div>
@@ -825,5 +825,18 @@ document.getElementById('heroSlider').addEventListener('touchend', e => {
       t.src = item.src;
     });
   })();
+
+
+  // Auto scroll ke #kalkulator jika URL mengandung hash
+window.addEventListener('load', function () {
+  if (window.location.hash === '#kalkulator') {
+    const el = document.getElementById('kalkulator');
+    if (el) {
+      setTimeout(() => {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+    }
+  }
+});
 </script>
 @endpush

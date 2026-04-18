@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DonasiController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ZakatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,3 +44,8 @@ Route::get('/program/beasiswa', fn() => redirect()->route('donasi.beasiswa'));
 Route::get('/wakaf', fn() => view('wakaf.index'))->name('wakaf');
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+
+Route::get('/zakat', [ZakatController::class, 'index'])->name('zakat.index');
+Route::post('/zakat/store', [ZakatController::class, 'store'])->name('zakat.store');
+
+
