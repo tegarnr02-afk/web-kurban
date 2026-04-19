@@ -139,7 +139,7 @@ NAVBAR
 
     {{-- Kanan: CTA (desktop) & Burger (mobile) --}}
     <div class="nav-cta">
-      <a href="{{ url('/login') }}" class="btn-ghost">Masuk</a>
+    <a href="{{ route('login') }}" class="btn-ghost">Masuk</a>
       <a href="{{ url('/#donasi') }}" class="btn-primary">
         <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M7.5 1.5C4.186 1.5 1.5 4.186 1.5 7.5s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6zm.75 9H6.75V6.75h1.5V10.5zm0-5.25H6.75V3.75h1.5v1.5z" fill="white"/></svg>
         Mulai Berdonasi
@@ -160,7 +160,7 @@ NAVBAR
   <a href="{{ url('/#blog') }}">Blog</a>
   <a href="{{ url('/#kontak') }}">Kontak</a>
   <div class="m-divider"></div>
-  <a href="{{ url('/login') }}" class="btn-ghost">Masuk</a>
+  <a href="{{ route('login') }}" class="btn-ghost">Masuk</a>
   <a href="{{ url('/#donasi') }}" class="btn-primary">Mulai Berdonasi</a>
 </div>
 

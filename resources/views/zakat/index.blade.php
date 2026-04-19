@@ -1,5 +1,4 @@
-
-
+{{-- resources/views/zakat/index.blade.php --}}
 @extends('layouts.app')
 
 @section('title', 'Zakat — Berkahin')
@@ -26,19 +25,61 @@
   }
   .z-page { font-family: 'DM Sans', sans-serif; background: var(--z-cream); color: var(--z-text); }
 
-  /* ── HERO ── */
+  /* ══════════════════════════════════════
+     HERO — Photo Background
+  ══════════════════════════════════════ */
   .z-hero {
-    position: relative; overflow: hidden;
+    position: relative;
+    overflow: hidden;
     padding: 5rem 1.5rem 4rem;
-    background: linear-gradient(160deg, #EAF7EF 0%, #FDF9F0 60%, #FAFBF8 100%);
     text-align: center;
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  .z-hero::before {
-    content:''; position:absolute; inset:0;
-    background-image: url("data:image/svg+xml,%3Csvg width='52' height='52' viewBox='0 0 52 52' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M26 2L31 10h10l-8 6 3 10-10-7-10 7 3-10-8-6h10z' fill='%230B5E35' fill-opacity='0.03'/%3E%3C/svg%3E");
+
+  /* Foto background */
+  .z-hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    z-index: 0;
+  }
+
+  /* Overlay hijau gelap berlapis */
+  .z-hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      160deg,
+      rgba(5, 40, 22, 0.92) 0%,
+      rgba(11, 94, 53, 0.80) 50%,
+      rgba(8, 55, 35, 0.90) 100%
+    );
+  }
+
+  /* Pattern bintang halus di atas overlay */
+  .z-hero-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='52' height='52' viewBox='0 0 52 52' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M26 2L31 10h10l-8 6 3 10-10-7-10 7 3-10-8-6h10z' fill='%23ffffff' fill-opacity='0.025'/%3E%3C/svg%3E");
     pointer-events: none;
   }
-  .z-hero-inner { position:relative; max-width:680px; margin:0 auto; }
+
+  /* Konten di atas segalanya */
+  .z-hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
   .z-arabic {
     font-family:'Amiri',serif; font-size:1.75rem;
     color: var(--z-gold); margin-bottom:.75rem; line-height:1.6;
@@ -46,12 +87,12 @@
   }
   .z-hero h1 {
     font-family:'Amiri',serif; font-size: clamp(2.2rem,5vw,3.6rem);
-    font-weight:700; color: var(--z-green); line-height:1.15;
+    font-weight:700; color: #fff; line-height:1.15;
     margin-bottom:1rem; animation: zFadeUp .7s .25s both;
   }
   .z-hero h1 em { color: var(--z-gold); font-style:normal; }
   .z-hero p {
-    font-size:1rem; color: var(--z-muted); line-height:1.75;
+    font-size:1rem; color: rgba(255,255,255,0.75); line-height:1.75;
     max-width:500px; margin:0 auto 2rem;
     animation: zFadeUp .7s .4s both;
   }
@@ -66,17 +107,28 @@
     cursor:pointer; border:none; text-decoration:none; transition: transform .2s, box-shadow .2s;
   }
   .z-btn:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(11,94,53,.18); }
-  .z-btn-primary { background: var(--z-green); color:#fff; }
-  .z-btn-outline  { background:transparent; color: var(--z-green); border:1.5px solid var(--z-green); }
-  .z-btn-outline:hover { background: var(--z-green-pale); }
+  .z-btn-primary { background: var(--z-gold); color: #3a1f00; }
+  .z-btn-primary:hover { box-shadow: 0 6px 20px rgba(200,144,46,.35); }
+  .z-btn-outline  { background: rgba(255,255,255,0.12); color: #fff; border:1.5px solid rgba(255,255,255,0.4); backdrop-filter: blur(4px); }
+  .z-btn-outline:hover { background: rgba(255,255,255,0.2); }
+
   .z-hero-stats {
-    display:flex; justify-content:center; gap:2.5rem; flex-wrap:wrap;
+    display:flex; justify-content:center; align-items:center;
+    gap:0; flex-wrap:wrap;
     margin-top:3.5rem; padding-top:2.5rem;
-    border-top:1px solid var(--z-border);
+    border-top:1px solid rgba(255,255,255,0.15);
     animation: zFadeUp .7s .7s both;
   }
-  .z-stat-num { font-family:'Amiri',serif; font-size:1.8rem; font-weight:700; color: var(--z-green); }
-  .z-stat-lbl { font-size:.75rem; color: var(--z-faint); margin-top:2px; }
+  .z-hstat { text-align:center; padding: 0 2.5rem; }
+  .z-hstat + .z-hstat { border-left: 1px solid rgba(255,255,255,0.15); }
+  .z-stat-num { font-family:'Amiri',serif; font-size:1.8rem; font-weight:700; color: var(--z-gold); }
+  .z-stat-lbl { font-size:.75rem; color: rgba(255,255,255,0.5); margin-top:2px; letter-spacing:.3px; }
+
+  @media(max-width:640px){
+    .z-hstat { padding: 12px 1.5rem; }
+    .z-hstat + .z-hstat { border-left:none; border-top:1px solid rgba(255,255,255,0.12); }
+    .z-hero-stats { flex-direction:column; }
+  }
 
   /* ── SECTION SHELL ── */
   .z-section { padding:5rem 1.5rem; }
@@ -326,7 +378,6 @@
     .z-bayar-grid    { grid-template-columns:1fr; }
     .z-calc-tabs     { grid-template-columns:repeat(2,1fr); }
     .z-guide-panel   { position:static; }
-    .z-hero-stats    { gap:1.5rem; }
   }
 </style>
 @endsection
@@ -335,9 +386,17 @@
 <div class="z-page">
 
   {{-- ════════════════════════════════════════════
-       HERO
+       HERO — Photo Background dari Unsplash
   ════════════════════════════════════════════ --}}
   <div class="z-hero">
+
+  <img class="z-hero-bg"
+   src="https://images.unsplash.com/photo-1771493003867-1aa55f96df5d?w=1400&q=85&fit=crop&auto=format"
+   alt="" aria-hidden="true">
+
+    
+    <div class="z-hero-overlay"></div>
+
     <div class="z-hero-inner">
       <p class="z-arabic">وَأَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ</p>
       <h1>Tunaikan Zakat,<br><em>Sucikan Hartamu</em></h1>
@@ -346,7 +405,9 @@
         <a href="#kalkulator" class="z-btn z-btn-primary">🧮 Hitung Zakat</a>
         <a href="#bayar"      class="z-btn z-btn-outline">💚 Bayar Sekarang</a>
       </div>
+      </div>
     </div>
+
   </div>
 
   {{-- ════════════════════════════════════════════
@@ -712,7 +773,6 @@
           <h3>Form Pembayaran Zakat</h3>
           <p>Isi data di bawah untuk memproses pembayaran zakat Anda</p>
 
-          {{-- Gunakan route Laravel untuk form action --}}
           <form id="zBayarForm" onsubmit="zBayar(event)">
             @csrf
             <div class="z-form" style="gap:.9rem">
@@ -776,7 +836,7 @@
 </div>
 @endsection
 
-@push('scripts')       ← jadi ini
+@push('scripts')
 <script>
 // ─── HELPERS ───────────────────────────────────────────────────
 const zFmt = n => Math.round(n).toLocaleString('id-ID');
@@ -867,7 +927,7 @@ const zStepData = [
   { title:'Pilih Mustahiq / Lembaga', desc:'8 golongan (asnaf) yang berhak menerima zakat menurut Al-Quran Surah At-Taubah:60.',
     list:['Fakir: tidak memiliki harta','Miskin: kekurangan harta','Amil: pengelola zakat','Mualaf: baru masuk Islam','Riqab: memerdekakan hamba sahaya','Gharimin: terlilit hutang','Fisabilillah: di jalan Allah','Ibnu Sabil: musafir kehabisan bekal'] },
   { title:'Niat & Bayarkan Zakat', desc:'Tunaikan zakat dengan niat ikhlas karena Allah SWT, disertai lafaz niat.',
-    list:['Lafaz niat zakat maal: "Nawaitu an ukhrija zakaata maali fardhon lillahi ta\'ala"','Bayarkan kepada amil atau mustahiq','Minta bukti pembayaran resmi','Simpan bukti untuk keperluan pajak','Catat tanggal bayar untuk referensi haul berikutnya'] }
+    list:['Lafaz niat: "Nawaitu an ukhrija zakaata maali fardhon lillahi ta\'ala"','Bayarkan kepada amil atau mustahiq','Minta bukti pembayaran resmi','Simpan bukti untuk keperluan pajak','Catat tanggal bayar untuk referensi haul berikutnya'] }
 ];
 function zSelectStep(idx) {
   document.querySelectorAll('.z-step').forEach((el,i) => el.classList.toggle('active', i === idx));
@@ -909,9 +969,8 @@ function zUpdateSummary() {
 function zBayar(e) {
   e.preventDefault();
   const nominal = +document.getElementById('zb-nominal').value || 0;
-
-  const form = document.getElementById('zBayarForm');
-  const data = new FormData(form);
+  const form    = document.getElementById('zBayarForm');
+  const data    = new FormData(form);
 
   fetch('{{ route("zakat.store") }}', {
     method: 'POST',
@@ -947,4 +1006,4 @@ document.querySelectorAll('a[href^="#"]').forEach(a =>
   })
 );
 </script>
-@endpush            
+@endpush

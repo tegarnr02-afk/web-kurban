@@ -112,3 +112,4 @@ class DonasiController extends Controller
         return view('donasi.sukses', compact('data'));
     }
 }
+
